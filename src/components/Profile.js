@@ -4,25 +4,48 @@ import JSONPretty from "react-json-pretty";
 
 const Profile = () => {
     const  { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-    const [ userData, setUserData ] = useState(null)
+    const [ publicResourceData, setPublicResourceData ] = useState(null)
+    const [ privateResourceData, setPrivateResourceData ] = useState(null)
+    const [ scopedResourceData, setScopedResourceData ] = useState(null)
 
+    const getPublicResource = async () => {
+            const url = `/api/public`;
+            const response = await fetch(url, );
+            const data = await response.json();
+            setPublicResourceData(data);
+    }
 
-    const getUserData = async () => {
+    const getPrivateResource = async () => {
+        const accessToken = await getAccessTokenSilently({
+            audience: "heroku-api-oauth",
+        });
+
+        const url = `/api/private`;
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+
+        const data = await response.json();
+        setPrivateResourceData(data);
+    }
+
+    const getPrivateScopedResource = async () => {
             const accessToken = await getAccessTokenSilently({
                 audience: "heroku-api-oauth",
                 scope:'read:private_resource'
             });
-            console.log('accessToken', accessToken)
+
             const url = `/api/private-scoped`;
             const response = await fetch(url, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-            console.log('pre-backend-call')
+
             const data = await response.json();
-            console.log('Friet', data)
-            setUserData(data);
+            setScopedResourceData(data);
     }
 
 
@@ -35,8 +58,14 @@ const Profile = () => {
             <hr />
             <JSONPretty data={user} />
             <hr />
-            <button onClick={() => getUserData()}>Get Userdata</button>
-            {userData && <JSONPretty data={userData} /> }
+            <button onClick={() => getPublicResource()}>Get Public Resource</button>
+            {publicResourceData && <JSONPretty data={publicResourceData} /> }
+            <hr />
+            <button onClick={() => getPrivateResource()}>Get Private Resource</button>
+            {privateResourceData && <JSONPretty data={privateResourceData} /> }
+            <hr />
+            <button onClick={() => getPrivateScopedResource()}>Get Private Scoped Resource</button>
+            {scopedResourceData && <JSONPretty data={scopedResourceData} /> }
         </div>
     )
 }
