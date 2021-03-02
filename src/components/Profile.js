@@ -8,20 +8,19 @@ const Profile = () => {
 
 
     const getUserData = async () => {
-
             const accessToken = await getAccessTokenSilently({
-                audience: `tentplanner-api`,
-                scope: "read:messages",
+                audience: "heroku-api-oauth",
+                scope:'read:private_resource'
             });
             console.log('accessToken', accessToken)
-            const url = `/api/private`;
+            const url = `/api/private-scoped`;
             const response = await fetch(url, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
             console.log('pre-backend-call')
-            const { data } = await response.json();
+            const data = await response.json();
             console.log('Friet', data)
             setUserData(data);
     }

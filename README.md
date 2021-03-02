@@ -1,9 +1,15 @@
+Resources
+
+https://spring.io/guides/gs/spring-boot-docker/
+https://spring.io/guides/tutorials/spring-boot-oauth2/
+
+https://dev.to/grekz/tutorial-creating-a-rest-api-with-kotlin-springboot-jpa-flyway-15j5
+
 https://www.youtube.com/watch?v=MqczHS3Z2bc
 
+https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
 https://auth0.com/docs/quickstart/spa/react/01-login
-
 https://auth0.com/docs/quickstart/spa/react/02-calling-an-api
-
 https://auth0.com/docs/quickstart/backend
 
 # Getting Started with Create React App
