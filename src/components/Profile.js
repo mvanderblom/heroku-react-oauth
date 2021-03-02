@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useAuth0} from "@auth0/auth0-react";
 import JSONPretty from "react-json-pretty";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL
+
 const Profile = () => {
     const  { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const [ publicResourceData, setPublicResourceData ] = useState(null)
@@ -9,10 +11,11 @@ const Profile = () => {
     const [ scopedResourceData, setScopedResourceData ] = useState(null)
 
     const getPublicResource = async () => {
-            const url = `/api/public`;
-            const response = await fetch(url, );
-            const data = await response.json();
-            setPublicResourceData(data);
+        const url = `${backendUrl}/api/public`;
+        console.log(url)
+        const response = await fetch(url);
+        const data = await response.json();
+        setPublicResourceData(data);
     }
 
     const getPrivateResource = async () => {
@@ -20,7 +23,7 @@ const Profile = () => {
             audience: "heroku-api-oauth",
         });
 
-        const url = `/api/private`;
+        const url = `${backendUrl}/api/private`;
         const response = await fetch(url, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -37,7 +40,7 @@ const Profile = () => {
                 scope:'read:private_resource'
             });
 
-            const url = `/api/private-scoped`;
+            const url = `${backendUrl}/api/private-scoped`;
             const response = await fetch(url, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

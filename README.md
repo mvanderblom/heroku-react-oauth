@@ -4,6 +4,7 @@ https://spring.io/guides/gs/spring-boot-docker/
 https://spring.io/guides/tutorials/spring-boot-oauth2/
 
 https://dev.to/grekz/tutorial-creating-a-rest-api-with-kotlin-springboot-jpa-flyway-15j5
+https://betterprogramming.pub/building-secure-login-flow-with-oauth-2-openid-in-react-apps-ce6e8e29630a
 
 https://www.youtube.com/watch?v=MqczHS3Z2bc
 
