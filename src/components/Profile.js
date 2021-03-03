@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
-import { useAuth0} from "@auth0/auth0-react";
+import React, {useState} from 'react'
+import {useAuth0} from "@auth0/auth0-react";
 import JSONPretty from "react-json-pretty";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL
+const defaultFetchProperties = {
+    credentials: 'include',
+    mode: 'cors',
+}
 
 const Profile = () => {
     const  { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -11,10 +15,7 @@ const Profile = () => {
     const [ scopedResourceData, setScopedResourceData ] = useState(null)
 
     const getPublicResource = async () => {
-        const url = `${backendUrl}/api/public`;
-        console.log(url)
-        const response = await fetch(url);
-        const data = await response.json();
+        const data = await doRequest(`${backendUrl}/api/public`);
         setPublicResourceData(data);
     }
 
@@ -23,34 +24,35 @@ const Profile = () => {
             audience: "heroku-api-oauth",
         });
 
-        const url = `${backendUrl}/api/private`;
-        const response = await fetch(url, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
+        const data = await doRequest(`${backendUrl}/api/private`, {
+            Authorization: `Bearer ${accessToken}`,
         });
 
-        const data = await response.json();
         setPrivateResourceData(data);
     }
 
     const getPrivateScopedResource = async () => {
-            const accessToken = await getAccessTokenSilently({
-                audience: "heroku-api-oauth",
-                scope:'read:private_resource'
-            });
+        const accessToken = await getAccessTokenSilently({
+            audience: "heroku-api-oauth",
+            scope:'read:private_resource'
+        });
 
-            const url = `${backendUrl}/api/private-scoped`;
-            const response = await fetch(url, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            });
+        const data = await doRequest(`${backendUrl}/api/private-scoped`, {
+            Authorization: `Bearer ${accessToken}`,
+        });
 
-            const data = await response.json();
-            setScopedResourceData(data);
+        setScopedResourceData(data);
     }
 
+    const doRequest = async (url, headers) => {
+        const response = await fetch(url, {
+            ...defaultFetchProperties,
+            headers: headers,
+        });
+
+        const data = await response.json();
+        return data;
+    }
 
     return (
         isAuthenticated &&
