@@ -24,14 +24,12 @@ function App() {
             <RequestPanel
                 label="Get Public Resource"
                 url={`${backendUrl}/api/public`}/>
-
             <RequestPanel
                 label="Get Private Resource"
                 accessToken={async () => await getAccessTokenSilently({
                         audience: "heroku-api-oauth",
                     })}
                 url={`${backendUrl}/api/private`}/>
-
             <RequestPanel
                 label="Get Private Scoped Resource"
                 accessToken={async () => await getAccessTokenSilently({
@@ -39,14 +37,6 @@ function App() {
                         scope:'read:private_resource'
                     })}
                 url={`${backendUrl}/api/private-scoped`}/>
-
-            <RequestPanel
-                label="Get Backend User Principal"
-                accessToken={async () => await getAccessTokenSilently({
-                    audience: "heroku-api-oauth",
-                })}
-                url={`${backendUrl}/api/user`}/>
-
             <RequestPanel
                 label="Get Visitor Resource"
                 accessToken={async () => await getAccessTokenSilently({
@@ -59,6 +49,14 @@ function App() {
                     audience: "heroku-api-oauth",
                 })}
                 url={`${backendUrl}/api/admin-private`}/>
+
+
+            <RequestPanel
+                label="Get Backend User Principal"
+                accessToken={async () => await getAccessTokenSilently({
+                    audience: "heroku-api-oauth",
+                })}
+                url={`${backendUrl}/api/user`}/>
         </div>
     );
 }
