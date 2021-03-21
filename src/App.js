@@ -36,11 +36,16 @@ function App() {
                 label="Get Private Scoped Resource"
                 accessToken={async () => await getAccessTokenSilently({
                         audience: "heroku-api-oauth",
-                    scope:'read:private_resource'
+                        scope:'read:private_resource'
                     })}
                 url={`${backendUrl}/api/private-scoped`}/>
 
-
+            <RequestPanel
+                label="Get Backend User Principal"
+                accessToken={async () => await getAccessTokenSilently({
+                        audience: "heroku-api-oauth",
+                    })}
+                url={`${backendUrl}/api/user`}/>
         </div>
     );
 }
