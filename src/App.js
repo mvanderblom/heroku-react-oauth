@@ -43,9 +43,22 @@ function App() {
             <RequestPanel
                 label="Get Backend User Principal"
                 accessToken={async () => await getAccessTokenSilently({
-                        audience: "heroku-api-oauth",
-                    })}
+                    audience: "heroku-api-oauth",
+                })}
                 url={`${backendUrl}/api/user`}/>
+
+            <RequestPanel
+                label="Get Visitor Resource"
+                accessToken={async () => await getAccessTokenSilently({
+                    audience: "heroku-api-oauth",
+                })}
+                url={`${backendUrl}/api/visitor-private`}/>
+            <RequestPanel
+                label="Get Admin Resource"
+                accessToken={async () => await getAccessTokenSilently({
+                    audience: "heroku-api-oauth",
+                })}
+                url={`${backendUrl}/api/admin-private`}/>
         </div>
     );
 }

@@ -11,8 +11,7 @@ ReactDOM.render(
     domain={domain}
     clientId={clientId}
     redirectUri={window.location.origin}
-    audience="heroku-api-oauth"
-    scope="read:private_resource">
+    audience="heroku-api-oauth">
     <App />
   </Auth0Provider>,
   document.getElementById('root')

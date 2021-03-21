@@ -21,16 +21,24 @@ const RequestPanel = (props) => {
                 ...defaultFetchProperties,
                 headers: headers,
             });
-
-            setData(await response.json())
+            if (response.status === 200)
+                setData(await response.json())
+            else
+                setData(response.status)
         } catch (e) {
             setData(e.message)
         }
     }
+
+    const clear = () => {
+        setData(null)
+    }
+
     return (
         <div>
             <hr />
             <button onClick={() => doRequest()}>{props.label}</button>
+            <button onClick={() => clear()}>Clear</button>
             {data && <JSONPretty data={data} /> }
         </div>
     )
