@@ -1,13 +1,10 @@
-import './App.css';
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 import Profile from "./components/Profile";
 import {useAuth0} from "@auth0/auth0-react";
 import RequestPanel from "./components/RequestPanel";
-import React from "react";
 
-
-const backendUrl = process.env.REACT_APP_BACKEND_URL
+const backendUrl: string = process.env.REACT_APP_BACKEND_URL!!
 
 function App() {
     const {isLoading, getAccessTokenSilently} = useAuth0();
@@ -49,8 +46,6 @@ function App() {
                     audience: "heroku-api-oauth",
                 })}
                 url={`${backendUrl}/api/admin-private`}/>
-
-
             <RequestPanel
                 label="Get Backend User Principal"
                 accessToken={async () => await getAccessTokenSilently({

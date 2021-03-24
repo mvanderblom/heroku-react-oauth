@@ -1,37 +1,39 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import JSONPretty from "react-json-pretty";
 
-const defaultFetchProperties = {
-    credentials: 'include',
-    mode: 'cors',
+interface RequestPanelProps {
+    accessToken?: Function
+    label: string
+    url: string
 }
 
-const RequestPanel = (props) => {
-    const [ data, setData ] = useState(null)
+const RequestPanel = (props: RequestPanelProps): JSX.Element => {
+    const [ data, setData ] = useState<String>()
 
     const doRequest = async () => {
         setData('loading...')
         try{
-            const headers = {}
+            let headers: HeadersInit = {}
             if(props.accessToken){
               headers['Authorization'] = `Bearer ${await props.accessToken()}`
             }
 
             const response = await fetch(props.url, {
-                ...defaultFetchProperties,
+                credentials: 'include',
+                mode: 'cors',
                 headers: headers,
             });
             if (response.status === 200)
                 setData(await response.json())
             else
-                setData(response.status)
+                setData(`ResponseStatus: ${response.status}`)
         } catch (e) {
             setData(e.message)
         }
     }
 
     const clear = () => {
-        setData(null)
+        setData(undefined)
     }
 
     return (

@@ -2,6 +2,13 @@
 
 See the app at: https://heroku-react-oauth.herokuapp.com
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+# Resources
+
+Below are a list of resources used while creating this app 
+
 ## Auth0
 - https://www.youtube.com/watch?v=MqczHS3Z2bc
 - https://betterprogramming.pub/building-secure-login-flow-with-oauth-2-openid-in-react-apps-ce6e8e29630a
@@ -11,10 +18,9 @@ See the app at: https://heroku-react-oauth.herokuapp.com
 ## Cors
 - https://web.dev/cross-origin-resource-sharing/
 
+## React
+- https://www.sitepoint.com/how-to-migrate-a-react-app-to-typescript/
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
