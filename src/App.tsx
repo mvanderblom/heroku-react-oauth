@@ -3,6 +3,8 @@ import LogoutButton from "./components/LogoutButton";
 import Profile from "./components/Profile";
 import {useAuth0} from "@auth0/auth0-react";
 import RequestPanel from "./components/RequestPanel";
+import { Admin, Resource, ListGuesser } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
 
 const backendUrl: string = process.env.REACT_APP_BACKEND_URL!!
 
@@ -11,7 +13,7 @@ function App() {
 
     if (isLoading)
         return <div>Loading....</div>
-
+    if (false)
     return (
         <div className="App">
             <LoginButton />
@@ -54,6 +56,10 @@ function App() {
                 url={`${backendUrl}/api/user`}/>
         </div>
     );
+    const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+    return <Admin dataProvider={dataProvider}>
+        <Resource name="users" list={ListGuesser} />
+    </Admin>;
 }
 
 export default App;
